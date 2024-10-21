@@ -2,19 +2,36 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Bottle from "../Bottle/Bottle";
 import './Bottles.css'
-import { addToLS } from "../../Utiles/localStroage";
+import { addToLS, getStrogeCart } from "../../Utiles/localStroage";
 
 const Bottles = () => {
-    const [bottles, setBottles] =useState([]);
-    const [cart,setCart] =useState([])
-    useEffect(() =>{
+    const [bottles, setBottles] = useState([]);
+    const [cart, setCart] = useState([])
+    useEffect(() => {
         fetch('water.json')
-        .then(res =>res.json())
-        .then(data => setBottles(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setBottles(data))
+    }, [])
+    useEffect(() => {
+        if (bottles.length > 0) {
+            const stroedCart = getStrogeCart();
+            console.log(stroedCart,bottles)
+            const saveCart =[];
+            for(const id of stroedCart){
+                console.log(id);
+                const buttlo =bottles.find(buttlo => buttlo.id ===id);
+                console.log(buttlo)
+                if(buttlo){
+                    saveCart.push(buttlo)
+                }
+            }
+            console.log(saveCart);
+            setCart(saveCart)
+        }
+    }, [bottles])
 
-    const hendleAddTocard =(bottle) =>{
-        const newCart =[...cart,bottle];
+    const hendleAddTocard = (bottle) => {
+        const newCart = [...cart, bottle];
         setCart(newCart)
         addToLS(bottle.id)
     }
@@ -24,13 +41,13 @@ const Bottles = () => {
             <h1>Bottles {bottles.length}</h1>
             <h6>Cart: {cart.length}</h6>
             <div className="bottles">
-            {
-                bottles.map(bottle => <Bottle
-                     key={bottle.id}
-                      bottle={bottle}
-                      hendleAddTocard={hendleAddTocard}
-                      ></Bottle>)
-            }
+                {
+                    bottles.map(bottle => <Bottle
+                        key={bottle.id}
+                        bottle={bottle}
+                        hendleAddTocard={hendleAddTocard}
+                    ></Bottle>)
+                }
             </div>
         </div>
     );

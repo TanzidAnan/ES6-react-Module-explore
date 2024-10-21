@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './Bottle.css'
 const Bottle = ({ bottle,hendleAddTocard }) => {
     const { name, img, price } = bottle;
-    console.log(bottle)
     // console.log(bottle);
     const [data, setData] = useState(false);
     const hendleButton = () => {
