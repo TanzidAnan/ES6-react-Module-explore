@@ -11,7 +11,7 @@ const Bottles = () => {
         .then(data => setBottles(data))
     },[])
     return (
-        <div>
+        <div className="bottle-container">
             <h1>Bottles {bottles.length}</h1>
             <div className="bottles">
             {
