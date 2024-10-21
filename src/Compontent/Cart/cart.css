@@ -1,0 +1,9 @@
+.img-name{
+    width: 100px;
+    height: 60px;
+    display: flex;
+    gap: 15px;
+}
+img{
+    width: 100px;
+}
