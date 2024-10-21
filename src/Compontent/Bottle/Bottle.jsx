@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import './Bottle.css'
 const Bottle = ({ bottle,hendleAddTocard }) => {
@@ -20,5 +21,9 @@ const Bottle = ({ bottle,hendleAddTocard }) => {
         </div>
     );
 };
+Bottle.propTypes={
+    bottle:PropTypes.object.isRequired,
+    hendleAddTocard:PropTypes.func.isRequired
+}
 
 export default Bottle;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Bottle from "../Bottle/Bottle";
 import './Bottles.css'
-import { addToLS, getStrogeCart } from "../../Utiles/localStroage";
+import { addToLS, getStrogeCart, removeFromLS } from "../../Utiles/localStroage";
 import Cart from "../Cart/Cart";
 
 const Bottles = () => {
@@ -33,14 +33,19 @@ const Bottles = () => {
 
     const hendleAddTocard = (bottle) => {
         const newCart = [...cart, bottle];
-        // setCart(newCart)
+        setCart(newCart)
         addToLS(bottle.id)
+    }
+    const hendleRemoveCart =(id) =>{
+        const remainingCart =cart.filter(bottles => bottles.id !==id);
+        setCart(remainingCart)
+        removeFromLS(id)
     }
 
     return (
         <div className="bottle-container">
             <h1>Bottles {bottles.length}</h1>
-            <Cart cart={cart}></Cart>
+            <Cart cart={cart} hendleRemoveCart={hendleRemoveCart}></Cart>
             
             <div className="bottles">
                 {
