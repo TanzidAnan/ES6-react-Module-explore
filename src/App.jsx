@@ -5,8 +5,13 @@ import { useEffect } from 'react';
 
 function App() {
   const [watchs,setWatchs] =useState([]);
+  // useEffect(() =>{
+  //   fetch('Watchs.json')
+  //   .then(res => res.json())
+  //   .then(data => setWatchs(data))
+  // },[])
   useEffect(() =>{
-    fetch('Watchs.json')
+    fetch('https://raw.githubusercontent.com/TanzidAnan/retro-forum/refs/heads/main/watchs.json')
     .then(res => res.json())
     .then(data => setWatchs(data))
   },[])
