@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Bottle from "../Bottle/Bottle";
 import './Bottles.css'
+import { addToLS } from "../../Utiles/localStroage";
 
 const Bottles = () => {
     const [bottles, setBottles] =useState([]);
@@ -15,6 +16,7 @@ const Bottles = () => {
     const hendleAddTocard =(bottle) =>{
         const newCart =[...cart,bottle];
         setCart(newCart)
+        addToLS(bottle.id)
     }
 
     return (
